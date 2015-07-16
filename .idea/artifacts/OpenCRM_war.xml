@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="OpenCRM:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="OpenCRM.war">
+      <element id="artifact" artifact-name="OpenCRM:war exploded" />
+    </root>
+  </artifact>
+</component>
