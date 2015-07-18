@@ -40,9 +40,8 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
-				<beans:value>com.opencrm.spring.model.Person</beans:value>
                 <beans:value>com.opencrm.spring.model.partners.PartnersEntity</beans:value>
-                <beans:value>com.opencrm.spring.model.partners.AdressesEntity</beans:value>
+                <beans:value>com.opencrm.spring.model.partners.AddressesEntity</beans:value>
                 <beans:value>com.opencrm.spring.model.partners.PersonsEntity</beans:value>
 			</beans:list>
 		</beans:property>
@@ -73,11 +72,11 @@
         <beans:property name="partnersDAO" ref="partnersDAO"></beans:property>
     </beans:bean>
 
-    <beans:bean id="adressesDAO" class="com.opencrm.spring.dao.AdressesDAOImpl">
+    <beans:bean id="adressesDAO" class="com.opencrm.spring.dao.AddressesDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="adressesService" class="com.opencrm.spring.service.AdressesServiceImpl">
-        <beans:property name="adressesDAO" ref="adressesDAO"></beans:property>
+    <beans:bean id="adressesService" class="com.opencrm.spring.service.AddressesServiceImpl">
+        <beans:property name="addressesDAO" ref="adressesDAO"></beans:property>
     </beans:bean>
 
 	<context:component-scan base-package="com.opencrm.spring" />
@@ -96,7 +95,8 @@
         <beans:property name="defaultEncoding" value="UTF-8" />
     </beans:bean>
 
-    <beans:bean id="partnersValidator" class="com.opencrm.spring.validator.PartnersFormValidator"/>
+    <beans:bean id="partnersValidator" class="com.opencrm.spring.validator.Partners.PartnersFormValidator"/>
+    <beans:bean id="adressesValidator" class="com.opencrm.spring.validator.Partners.AddressesFormValidator"/>
 
 
 </beans:beans>

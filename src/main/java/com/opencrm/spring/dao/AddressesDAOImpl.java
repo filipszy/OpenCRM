@@ -1,8 +1,6 @@
 package com.opencrm.spring.dao;
 
-import com.opencrm.spring.model.partners.AdressesEntity;
-import com.opencrm.spring.model.partners.PartnersEntity;
-import org.hibernate.Query;
+import com.opencrm.spring.model.partners.AddressesEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -17,9 +15,9 @@ import java.util.List;
  */
 
 @Repository
-public class AdressesDAOImpl implements AdressesDAO {
+public class AddressesDAOImpl implements AddressesDAO {
 
-    private static final Logger logger = LoggerFactory.getLogger(AdressesDAOImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(AddressesDAOImpl.class);
 
     private SessionFactory sessionFactory;
 
@@ -30,26 +28,26 @@ public class AdressesDAOImpl implements AdressesDAO {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<AdressesEntity> listAdresses() {
+    public List<AddressesEntity> listAdresses() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<AdressesEntity> adressesEntityList = session.createQuery("FROM adresses").list();
-        for(AdressesEntity a : adressesEntityList) {
+        List<AddressesEntity> addressesEntityList = session.createQuery("FROM adresses").list();
+        for(AddressesEntity a : addressesEntityList) {
             System.out.println("ADRES ID: "+a.getId());
             logger.info("Adresses list: "+a);
         }
 
-        return adressesEntityList;
+        return addressesEntityList;
     }
 
     @Override
-    public void addAdresses(AdressesEntity a) {
+    public void addAdresses(AddressesEntity a) {
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(a);
         logger.info("Add adresses "+a);
     }
 
     @Override
-    public void updateAdresses(AdressesEntity a) {
+    public void updateAdresses(AddressesEntity a) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(a);
         logger.info("Update adresses: "+a);
@@ -58,7 +56,7 @@ public class AdressesDAOImpl implements AdressesDAO {
     @Override
     public void removeAdresses(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        AdressesEntity a = (AdressesEntity) session.load(AdressesEntity.class, new Integer(id));
+        AddressesEntity a = (AddressesEntity) session.load(AddressesEntity.class, new Integer(id));
 
         if(null != a) {
             session.delete(a);
@@ -67,9 +65,9 @@ public class AdressesDAOImpl implements AdressesDAO {
     }
 
     @Override
-    public AdressesEntity getAdressesById(int id) {
+    public AddressesEntity getAdressesById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        AdressesEntity a = (AdressesEntity) session.load(AdressesEntity.class, new Integer(id));
+        AddressesEntity a = (AddressesEntity) session.load(AddressesEntity.class, new Integer(id));
 
         logger.info("Get adresses by idL "+a);
         return a;

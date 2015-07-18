@@ -47,8 +47,8 @@
 
        <div class="col-md-6">
            <h3>Adresy</h3>
-           <c:if test="${!empty(partner.adressesEntity)}">
-           <c:forEach items="${partner.adressesEntity}" var="ad">
+           <c:if test="${!empty(partner.addressesEntity)}">
+           <c:forEach items="${partner.addressesEntity}" var="ad">
                <strong>${ad.title}</strong>
                <span class="pull-right">
                <a href="/partners/${ad.id}/adresses/edit/${partner.id}"><span class="glyphicon glyphicon-pencil"></span></a>

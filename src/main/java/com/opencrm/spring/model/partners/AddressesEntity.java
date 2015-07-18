@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by Filip Szylderowicz on 17.05.15.
  */
 @Entity(name="adresses")
-public class AdressesEntity {
+public class AddressesEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,9 +41,9 @@ public class AdressesEntity {
     private PartnersEntity partnersEntity;
 
 
-    public AdressesEntity() {}
+    public AddressesEntity() {}
 
-    public AdressesEntity(String Street, String Street2, String City, String PostCode, String Country) {
+    public AddressesEntity(String Street, String Street2, String City, String PostCode, String Country) {
         this.Street = Street;
         this.Street2 = Street2;
         this.City = City;

@@ -29,7 +29,7 @@ public class PartnersEntity {
     private String code;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "partnersEntity")
-    private Set<AdressesEntity> adressesEntity = new HashSet<AdressesEntity>(0);
+    private Set<AddressesEntity> addressesEntity = new HashSet<AddressesEntity>(0);
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "partnersEntity")
     private Set<PersonsEntity> personsEntity = new HashSet<PersonsEntity>(0);
@@ -78,12 +78,12 @@ public class PartnersEntity {
         this.code = code;
     }
 
-    public Set<AdressesEntity> getAdressesEntity() {
-        return adressesEntity;
+    public Set<AddressesEntity> getAddressesEntity() {
+        return addressesEntity;
     }
 
-    public void setAdressesEntity(Set<AdressesEntity> adressesEntity) {
-        this.adressesEntity = adressesEntity;
+    public void setAddressesEntity(Set<AddressesEntity> addressesEntity) {
+        this.addressesEntity = addressesEntity;
     }
 
     public Set<PersonsEntity> getPersonsEntity() {

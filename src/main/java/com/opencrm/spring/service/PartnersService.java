@@ -2,7 +2,6 @@ package com.opencrm.spring.service;
 
 
 
-import com.opencrm.spring.model.partners.AdressesEntity;
 import com.opencrm.spring.model.partners.PartnersEntity;
 
 import java.util.List;

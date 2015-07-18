@@ -38,8 +38,8 @@
                 </c:if>
                 <div class="control-group">
                     <form:label cssClass="control-label" path="name">Nazwa:*</form:label>
+                    <form:errors path="name" cssClass="text-danger"/>
                     <div class="controls">
-                        <form:errors path="name" cssClass="error"/>
                         <form:input cssClass="form-control" path="name"/>
                     </div>
                 </div>
@@ -51,8 +51,8 @@
                 </div>
                 <div class="control-group">
                     <form:label cssClass="control-label" path="code">Kod:*</form:label>
+                    <form:errors path="code" cssClass="text-danger"/>
                     <div class="controls">
-                        <form:errors path="code" cssClass="error"/>
                         <form:input cssClass="form-control" path="code"/>
                     </div>
                 </div>

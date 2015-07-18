@@ -1,17 +1,18 @@
 package com.opencrm.spring;
 
-import com.opencrm.spring.model.partners.AdressesEntity;
+import com.opencrm.spring.model.partners.AddressesEntity;
 import com.opencrm.spring.model.partners.PartnersEntity;
-import com.opencrm.spring.service.AdressesService;
+import com.opencrm.spring.service.AddressesService;
 import com.opencrm.spring.service.PartnersService;
-import com.opencrm.spring.validator.PartnersFormValidator;
+import com.opencrm.spring.validator.Partners.AddressesFormValidator;
+import com.opencrm.spring.validator.Partners.PartnersFormValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +22,16 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/partners")
 public class PartnersController {
 
+    private static final Logger logger = LoggerFactory.getLogger(PartnersController.class);
     private PartnersService partnersService;
 
-    private AdressesService adressesService;
+    private AddressesService addressesService;
+
     @Autowired
     private PartnersFormValidator partnersFormValidator;
+
+    @Autowired
+    private AddressesFormValidator addressesFormValidator;
 
     @Autowired(required = true)
     @Qualifier(value = "partnersService")
@@ -35,14 +41,16 @@ public class PartnersController {
 
     @Autowired(required = true)
     @Qualifier(value = "adressesService")
-    public void setAdressesService(AdressesService as) {
-        this.adressesService = as;
-    }
+    public void setAddressesService(AddressesService as) { this.addressesService = as; }
 
     @InitBinder("partnerSave")
-    private void initBinder(WebDataBinder binder) {
+    private void initPartnersBinder(WebDataBinder binder) {
         binder.setValidator(partnersFormValidator);
     }
+
+    @InitBinder("adressesSave")
+    private void initAdressesBinder(WebDataBinder binder) { binder.setValidator(addressesFormValidator); }
+
 
     @ModelAttribute("partners")
     public PartnersEntity createPartnersEntityModel() {
@@ -50,8 +58,8 @@ public class PartnersController {
     }
 
     @ModelAttribute("adresses")
-    public AdressesEntity createAdressesEntityModel() {
-        return new AdressesEntity();
+    public AddressesEntity createAdressesEntityModel() {
+        return new AddressesEntity();
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -69,7 +77,7 @@ public class PartnersController {
 
     @RequestMapping(value = "/add/adresses/{id}")
     public ModelAndView addAdresses(@PathVariable("id") int id, Model model) {
-        model.addAttribute("adressesSave", new AdressesEntity());
+        model.addAttribute("adressesSave", new AddressesEntity());
         model.addAttribute("partId", id);
         return new ModelAndView("partners/addAdresses");
     }
@@ -123,21 +131,29 @@ public class PartnersController {
 
     //For add and update person both
     @RequestMapping(value = "/adresses/save/{id}", method = RequestMethod.POST)
-    public String saveAdresses(@PathVariable("id") int id, @ModelAttribute("adressesSave") AdressesEntity adressesSave, BindingResult bindingResult) {
+    public String saveAdresses(@PathVariable("id") int id, @ModelAttribute("adressesSave") @Validated AddressesEntity adressesSave, BindingResult bindingResult, Model model) {
 
-        if (bindingResult.hasErrors()) {
-            return "partners/add";
-        }
+
 
         PartnersEntity partnersEntity = this.partnersService.getPartnerById(id);
         adressesSave.setPartnersEntity(partnersEntity);
 
+
         if (adressesSave.getId() == 0) {
-            //new person, add it
-            this.adressesService.addAdresses(adressesSave);
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("partId", id);
+                return "partners/addAdresses";
+            } else {
+                this.addressesService.addAdresses(adressesSave);
+            }
         } else {
             //existing person, call update
-            this.adressesService.updateAdresses(adressesSave);
+            if(bindingResult.hasErrors()) {
+                model.addAttribute("partId", id);
+                return "partners/addAdresses";
+            } else {
+                this.addressesService.updateAdresses(adressesSave);
+            }
         }
 
 
@@ -148,7 +164,7 @@ public class PartnersController {
     @RequestMapping(value = "{id}/adresses/edit/{partid}", method = RequestMethod.GET)
     public String editAdresses(@PathVariable("id") int id, @PathVariable("partid") int partid, Model model) {
 
-        model.addAttribute("adressesSave", this.adressesService.getAdressesById(id));
+        model.addAttribute("adressesSave", this.addressesService.getAdressesById(id));
         model.addAttribute("partId", partid);
 
         return "partners/addAdresses";
@@ -157,7 +173,7 @@ public class PartnersController {
     @RequestMapping(value = "{partid}/adresses/remove/{id}")
     public String removeAdresses(@PathVariable("id") int id, @PathVariable("partid") int partid) {
 
-        this.adressesService.removeAdresses(id);
+        this.addressesService.removeAdresses(id);
 
         return "redirect:/partners/show/" + partid;
     }

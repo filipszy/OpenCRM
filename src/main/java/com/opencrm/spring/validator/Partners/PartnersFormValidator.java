@@ -1,4 +1,4 @@
-package com.opencrm.spring.validator;
+package com.opencrm.spring.validator.Partners;
 
 import com.opencrm.spring.model.partners.PartnersEntity;
 import com.opencrm.spring.service.PartnersService;
@@ -6,13 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
-import java.util.List;
 
 /**
  * Created by Filip Szylderowicz on 05.06.15.
@@ -25,7 +21,7 @@ public class PartnersFormValidator implements Validator {
 
     @Autowired(required = true)
     @Qualifier(value = "partnersService")
-    public void setPersonService(PartnersService ps) {
+    public void setPartnersService(PartnersService ps) {
         this.partnersService = ps;
     }
 

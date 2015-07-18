@@ -20,7 +20,7 @@
     <title>OpenCRM</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://bootswatch.com/paper/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.css">
 
     <!-- Optional theme -->
    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">-->
@@ -148,8 +148,8 @@
 <body role="document">
 
 <!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -159,14 +159,10 @@
             </button>
             <a class="navbar-brand" href="#">OpenCRM</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li><a href="/">Srona główna</a></li>
-                <li class="dropdown"><a href="/partners/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Partnerzy <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/partners">Lista partnerów</a></li>
-                        <li><a href="/partners/add">Dodaj partnera</a></li>
-                    </ul> </li>
+                <li><a href="/partners/">Partnerzy</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
