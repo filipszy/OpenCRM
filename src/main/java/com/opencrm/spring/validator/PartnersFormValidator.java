@@ -2,6 +2,8 @@ package com.opencrm.spring.validator;
 
 import com.opencrm.spring.model.partners.PartnersEntity;
 import com.opencrm.spring.service.PartnersService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContextAware;
@@ -17,11 +19,13 @@ import java.util.List;
  */
 public class PartnersFormValidator implements Validator {
 
+    private static final Logger logger = LoggerFactory.getLogger(PartnersFormValidator.class);
+
     private PartnersService partnersService;
 
-    @Autowired(required=true)
-    @Qualifier(value="partnersService")
-    public void setPersonService(PartnersService ps){
+    @Autowired(required = true)
+    @Qualifier(value = "partnersService")
+    public void setPersonService(PartnersService ps) {
         this.partnersService = ps;
     }
 
@@ -37,16 +41,24 @@ public class PartnersFormValidator implements Validator {
 
         PartnersEntity part = (PartnersEntity) obj;
         String codeVal = part.getCode();
+        String oldCodeVal = null;
+        boolean oldCode = true;
 
-            boolean code = this.partnersService.getPartnerCodeValid(codeVal);
+        if (part.getId() > 0) {
+            PartnersEntity p = this.partnersService.getPartnerById(part.getId());
+            oldCodeVal = p.getCode();
+            oldCode = !codeVal.equals(oldCodeVal);
+        }
 
-            if (!code) {
-                errors.rejectValue("code", "code.unique");
-            }
+
+        boolean code = this.partnersService.getPartnerCodeValid(codeVal);
+
+        if (!code && oldCode) {
+            errors.rejectValue("code", "code.unique");
+        }
 
 
     }
-
 
 
 }

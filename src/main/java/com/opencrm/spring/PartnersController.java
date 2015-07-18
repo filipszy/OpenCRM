@@ -20,23 +20,24 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/partners")
 public class PartnersController {
-	
-	private PartnersService partnersService;
+
+    private PartnersService partnersService;
 
     private AdressesService adressesService;
-	
-	@Autowired(required=true)
-	@Qualifier(value="partnersService")
-	public void setPersonService(PartnersService ps){
-		this.partnersService = ps;
-	}
+    @Autowired
+    private PartnersFormValidator partnersFormValidator;
+
+    @Autowired(required = true)
+    @Qualifier(value = "partnersService")
+    public void setPersonService(PartnersService ps) {
+        this.partnersService = ps;
+    }
 
     @Autowired(required = true)
     @Qualifier(value = "adressesService")
-    public void setAdressesService(AdressesService as) { this.adressesService = as;}
-
-    @Autowired
-    private PartnersFormValidator partnersFormValidator;
+    public void setAdressesService(AdressesService as) {
+        this.adressesService = as;
+    }
 
     @InitBinder("partnerSave")
     private void initBinder(WebDataBinder binder) {
@@ -53,12 +54,12 @@ public class PartnersController {
         return new AdressesEntity();
     }
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String listPartners(Model model) {
-		model.addAttribute("partner", new PartnersEntity());
-		model.addAttribute("listPartners", this.partnersService.listPartners());
-		return "partners";
-	}
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String listPartners(Model model) {
+        model.addAttribute("partner", new PartnersEntity());
+        model.addAttribute("listPartners", this.partnersService.listPartners());
+        return "partners";
+    }
 
     @RequestMapping(value = "/add")
     public ModelAndView addPartner(Model model) {
@@ -72,19 +73,17 @@ public class PartnersController {
         model.addAttribute("partId", id);
         return new ModelAndView("partners/addAdresses");
     }
-	
 
-	
-	@RequestMapping("/remove/{id}")
-    public String removePartner(@PathVariable("id") int id){
-		
+
+    @RequestMapping("/remove/{id}")
+    public String removePartner(@PathVariable("id") int id) {
+
         this.partnersService.removePartner(id);
         return "redirect:/partners";
     }
- 
+
     @RequestMapping("/edit/{id}")
-    public String editPartner(@PathVariable("id") int id,  Model model){
-        model.addAttribute("partner", this.partnersService.getPartnerById(id));
+    public String editPartner(@PathVariable("id") int id, Model model) {
         model.addAttribute("partnerSave", this.partnersService.getPartnerById(id));
         return "partners/add";
     }
@@ -96,29 +95,35 @@ public class PartnersController {
     }
 
     //For add and update person both
-    @RequestMapping(value= "/save", method = RequestMethod.POST)
-    public String savePartner(@ModelAttribute("partnerSave") @Validated PartnersEntity partnerSave, BindingResult bindingResult){
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String savePartner(@ModelAttribute("partnerSave") @Validated PartnersEntity partnerSave, BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            return "partners/add";
-        }
-        if(partnerSave.getId() == 0){
+
+        if (partnerSave.getId() == 0) {
             //new person, add it
-            this.partnersService.addPartner(partnerSave);
-        }else{
+            if (bindingResult.hasErrors()) {
+                return "partners/add";
+            } else {
+                this.partnersService.addPartner(partnerSave);
+            }
+        } else {
             //existing person, call update
-            this.partnersService.updatePartner(partnerSave);
+            if (bindingResult.hasErrors()) {
+                return "partners/add";
+            } else {
+                this.partnersService.updatePartner(partnerSave);
+            }
         }
 
         int id = partnerSave.getId();
 
-        return "redirect:/partners/show/"+id;
+        return "redirect:/partners/show/" + id;
 
     }
 
     //For add and update person both
-    @RequestMapping(value= "/adresses/save/{id}", method = RequestMethod.POST)
-    public String saveAdresses(@PathVariable("id") int id, @ModelAttribute("adressesSave") AdressesEntity adressesSave, BindingResult bindingResult){
+    @RequestMapping(value = "/adresses/save/{id}", method = RequestMethod.POST)
+    public String saveAdresses(@PathVariable("id") int id, @ModelAttribute("adressesSave") AdressesEntity adressesSave, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "partners/add";
@@ -127,16 +132,16 @@ public class PartnersController {
         PartnersEntity partnersEntity = this.partnersService.getPartnerById(id);
         adressesSave.setPartnersEntity(partnersEntity);
 
-        if(adressesSave.getId() == 0){
+        if (adressesSave.getId() == 0) {
             //new person, add it
             this.adressesService.addAdresses(adressesSave);
-        }else{
+        } else {
             //existing person, call update
             this.adressesService.updateAdresses(adressesSave);
         }
 
 
-        return "redirect:/partners/show/"+id;
+        return "redirect:/partners/show/" + id;
 
     }
 
@@ -154,7 +159,7 @@ public class PartnersController {
 
         this.adressesService.removeAdresses(id);
 
-        return "redirect:/partners/show/"+partid;
+        return "redirect:/partners/show/" + partid;
     }
-	
+
 }
