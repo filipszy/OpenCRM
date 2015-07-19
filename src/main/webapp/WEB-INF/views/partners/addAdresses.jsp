@@ -6,16 +6,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
-<%@include file="../theme/header.jsp" %>
-<div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-            <li><a href="/partners/show/${partId}">Partner</a></li>
-            <li><a href="/partners/edit/${partId}">Edytuj</a></li>
-            <li class="active"><a href="#"><c:if test="${adressesSave.id>0}">Edytuj</c:if><c:if test="${adressesSave.id==0}">Dodaj</c:if> adres</a></li>
-            <li><a href="/partners/remove/${PartId}">Usuń</a></li>
-        </ul>
-    </div>
+<jsp:include page="../theme/header.jsp">
+    <jsp:param name="active" value="partners"/>
+</jsp:include>
+
+<jsp:include page="../theme/sidebar.jsp">
+    <jsp:param name="sidebar" value="showpartner" />
+    <jsp:param name="active" value="address" />
+    <jsp:param name="id" value="${partId}" />
+</jsp:include>
+
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 <div class="page-header">
     <h2><c:if test="${adressesSave.id>0}">Edytuj</c:if><c:if test="${adressesSave.id==0}">Dodaj</c:if> adres</h2>

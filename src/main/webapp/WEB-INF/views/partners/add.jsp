@@ -6,22 +6,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
-<%@include file="../theme/header.jsp" %>
-<div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-            <c:if test="${partnerSave.id>0}">
-                <li><a href="/partners/show/${partnerSave.id}">Partner</a></li>
-                <li class="active"><a href="/partners/edit/${partnerSave.id}">Edytuj</a></li>
-                <li><a href="/partners/add/adresses/${partnerSave.id}">Dodaj adres</a></li>
-                <li><a href="/partners/remove/${partnerSave.id}">Usuń</a></li>
-            </c:if>
-            <c:if test="${partnerSave.id==0}">
-                <li><a href="/partners/">Partnerzy</a></li>
-                <li class="active"><a href="#">Dodaj partnera</a></li>
-            </c:if>
-        </ul>
-    </div>
+<jsp:include page="../theme/header.jsp">
+    <jsp:param name="active" value="partners"/>
+</jsp:include>
+
+<c:if test="${partnerSave.id>0}"><c:set var="active" value="edit" /><c:set var="sidebar" value="showpartner" /></c:if>
+<c:if test="${partnerSave.id==0}"><c:set var="active" value="add" /><c:set var="sidebar" value="partners" /></c:if>
+
+<jsp:include page="../theme/sidebar.jsp">
+    <jsp:param name="id" value="${partnerSave.id}" />
+    <jsp:param name="sidebar" value="${sidebar}" />
+    <jsp:param name="active" value="${active}" />
+</jsp:include>
+
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <div class="page-header">

@@ -3,14 +3,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="theme/header.jsp"%>
-<div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Partnerzy</a></li>
-                <li><a href="/partners/add">Dodaj partnera</a></li>
-        </ul>
-    </div>
+<jsp:include page="theme/header.jsp">
+    <jsp:param name="active" value="partners"/>
+</jsp:include>
+
+<jsp:include page="theme/sidebar.jsp">
+    <jsp:param name="sidebar" value="partners" />
+    <jsp:param name="active" value="partners" />
+</jsp:include>
+
+
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="page-header">
         <h2>Partnerzy</h2>
@@ -21,9 +23,9 @@
                     <thead>
                     <tr>
                         <th>Nazwa</th>
-                        <th>Nazwa skrócona</th>
-                        <th>Kod</th>
-                        <th style="width: 190px">&nbsp;</th>
+                        <th style="width: 30%">Nazwa skrócona</th>
+                        <th style="width: 10%">Kod</th>
+                        <th style="width: 128px">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,7 +35,7 @@
                             <td>${partner.shortName}</td>
                             <td>${partner.code}</td>
                             <td>
-                                <a href="/partners/edit/${partner.id}" class="btn btn-xs">Edytuj</a>
+                                <a href="/partners/edit/${partner.id}" class="btn btn-default btn-xs">Edytuj</a>
                                 <a href="/partners/show/${partner.id}" class="btn btn-xs btn-primary">Przejdź</a>
                             </td>
                         </tr>

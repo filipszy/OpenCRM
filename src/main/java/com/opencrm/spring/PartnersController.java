@@ -2,10 +2,13 @@ package com.opencrm.spring;
 
 import com.opencrm.spring.model.partners.AddressesEntity;
 import com.opencrm.spring.model.partners.PartnersEntity;
+import com.opencrm.spring.model.partners.PersonsEntity;
 import com.opencrm.spring.service.AddressesService;
 import com.opencrm.spring.service.PartnersService;
+import com.opencrm.spring.service.PersonsService;
 import com.opencrm.spring.validator.Partners.AddressesFormValidator;
 import com.opencrm.spring.validator.Partners.PartnersFormValidator;
+import com.opencrm.spring.validator.Partners.PersonsFormValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +30,16 @@ public class PartnersController {
 
     private AddressesService addressesService;
 
+    private PersonsService personsService;
+
     @Autowired
     private PartnersFormValidator partnersFormValidator;
 
     @Autowired
     private AddressesFormValidator addressesFormValidator;
+
+    @Autowired
+    private PersonsFormValidator personsFormValidator;
 
     @Autowired(required = true)
     @Qualifier(value = "partnersService")
@@ -43,6 +51,10 @@ public class PartnersController {
     @Qualifier(value = "adressesService")
     public void setAddressesService(AddressesService as) { this.addressesService = as; }
 
+    @Autowired
+    @Qualifier(value = "personsService")
+    public void setPersonsService(PersonsService pr) { this.personsService = pr;}
+
     @InitBinder("partnerSave")
     private void initPartnersBinder(WebDataBinder binder) {
         binder.setValidator(partnersFormValidator);
@@ -50,6 +62,9 @@ public class PartnersController {
 
     @InitBinder("adressesSave")
     private void initAdressesBinder(WebDataBinder binder) { binder.setValidator(addressesFormValidator); }
+
+    @InitBinder("personsSave")
+    private void initPersonsBinder(WebDataBinder binder) { binder.setValidator(personsFormValidator);}
 
 
     @ModelAttribute("partners")
@@ -61,6 +76,9 @@ public class PartnersController {
     public AddressesEntity createAdressesEntityModel() {
         return new AddressesEntity();
     }
+
+    @ModelAttribute("persons")
+    public PersonsEntity createPersonsEntityModel() { return new PersonsEntity(); };
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String listPartners(Model model) {
@@ -80,6 +98,13 @@ public class PartnersController {
         model.addAttribute("adressesSave", new AddressesEntity());
         model.addAttribute("partId", id);
         return new ModelAndView("partners/addAdresses");
+    }
+
+    @RequestMapping(value = "/add/persons/{id}")
+    public ModelAndView addPersons(@PathVariable("id") int id, Model model) {
+        model.addAttribute("personsSave", new PersonsEntity());
+        model.addAttribute("partId", id);
+        return new ModelAndView("partners/addPersons");
     }
 
 
@@ -178,4 +203,54 @@ public class PartnersController {
         return "redirect:/partners/show/" + partid;
     }
 
+    //For add and update person both
+    @RequestMapping(value = "/persons/save/{id}", method = RequestMethod.POST)
+    public String savePersons(@PathVariable("id") int id, @ModelAttribute("personsSave") @Validated PersonsEntity personsSave, BindingResult bindingResult, Model model) {
+
+
+
+        PartnersEntity partnersEntity = this.partnersService.getPartnerById(id);
+        personsSave.setPartnersEntity(partnersEntity);
+
+        logger.info("PERSON ID -> "+personsSave.getId());
+        if (personsSave.getId() == 0) {
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("partId", id);
+                return "partners/addPersons";
+            } else {
+                this.personsService.addPerson(personsSave);
+            }
+        } else {
+            //existing person, call update
+            if(bindingResult.hasErrors()) {
+                model.addAttribute("partId", id);
+                return "partners/addPersons";
+            } else {
+                this.personsService.updatePerson(personsSave);
+            }
+        }
+
+
+        return "redirect:/partners/show/" + id;
+
+    }
+
+    @RequestMapping(value = "{id}/persons/edit/{partid}", method = RequestMethod.GET)
+    public String editPersons(@PathVariable("id") int id, @PathVariable("partid") int partid, Model model) {
+
+        model.addAttribute("personsSave", this.personsService.getPersonById(id));
+        PersonsEntity p = this.personsService.getPersonById(id);
+        logger.info(p.getContactType());
+        model.addAttribute("partId", partid);
+
+        return "partners/addPersons";
+    }
+
+    @RequestMapping(value = "{partid}/persons/remove/{id}")
+    public String removePersons(@PathVariable("id") int id, @PathVariable("partid") int partid) {
+
+        this.personsService.removePerson(id);
+
+        return "redirect:/partners/show/" + partid;
+    }
 }

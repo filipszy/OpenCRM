@@ -3,17 +3,17 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@include file="../theme/header.jsp"%>
-<div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Partner</a></li>
-            <li> <a href="/partners/edit/${partner.id}">Edytuj</a></li>
-            <li><a href="/partners/add/adresses/${partner.id}">Dodaj adres</a></li>
-            <li><a href="/partners/remove/${partner.id}">Usuń</a></li>
-        </ul>
+<jsp:include page="../theme/header.jsp">
+    <jsp:param name="active" value="partners"/>
+</jsp:include>
 
-    </div>
+
+<jsp:include page="../theme/sidebar.jsp">
+    <jsp:param name="sidebar" value="showpartner" />
+    <jsp:param name="active" value="partner" />
+    <jsp:param name="id" value="${partner.id}" />
+</jsp:include>
+
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <div class="page-header">
         <c:if test="${!empty(partner.shortName)}">
@@ -63,6 +63,27 @@
            </c:forEach>
         </c:if>
        </div>
+
+        <div class="col-md-6">
+            <h3>Osoby kontaktowe</h3>
+            <c:if test="${!empty(partner.personsEntity)}">
+                <c:forEach items="${partner.personsEntity}" var="pe">
+                    <strong>${pe.contactType}</strong>
+               <span class="pull-right">
+               <a href="/partners/${pe.id}/persons/edit/${partner.id}"><span class="glyphicon glyphicon-pencil"></span></a>
+               <a href="/partners/${partner.id}/persons/remove/${pe.id}"><span class="glyphicon glyphicon-trash"></span></a></span><br/>
+                    ${pe.firstName} ${pe.lastName}<br/>
+                    <c:if test="${!empty(pe.title)}">
+                        <i>${pe.title}</i><br/>
+                    </c:if>
+                    <span class="glyphicon glyphicon-phone-alt"></span> ${pe.phone}
+                    <c:if test="${!empty(pe.mobile)}"><span class="glyphicon glyphicon-phone"></span> ${pe.mobile}</c:if><br/>
+                    <span class="glyphicon glyphicon-envelope"></span> ${pe.email}
+                    <hr/>
+                    <div class="clearfix">&nbsp;</div>
+                </c:forEach>
+            </c:if>
+        </div>
     </div>
 </div>
 <%@include file="../theme/footer.jsp"%>

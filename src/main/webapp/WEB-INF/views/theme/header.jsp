@@ -5,6 +5,7 @@
   Time: 14:47
   To change this template use File | Settings | File Templates.
 --%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="pl">
 <head>
@@ -157,12 +158,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">OpenCRM</a>
+            <a class="navbar-brand" href="/">OpenCRM</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li><a href="/">Srona główna</a></li>
-                <li><a href="/partners/">Partnerzy</a></li>
+                <li <c:if test="${param.active == 'home'}"> class="active"</c:if>><a href="/">Srona główna</a></li>
+                <li <c:if test="${param.active == 'partners'}"> class="active"</c:if>><a href="/partners/">Partnerzy</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
