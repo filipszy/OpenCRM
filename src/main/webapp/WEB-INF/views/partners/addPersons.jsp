@@ -21,7 +21,7 @@
     <h2><c:if test="${personsSave.id>0}">Edytuj</c:if><c:if test="${personsSave.id==0}">Dodaj</c:if> osobę kontaktową</h2>
 </div>
     <div class="col-md-12">
-        <c:url var="saveAction" value="/partners/persons/save/${partId}"></c:url>
+        <c:url var="saveAction" value="/u/partners/persons/save/${partId}"></c:url>
 
         <form:form method="post" action="${saveAction}" modelAttribute="personsSave" commandName="personsSave" class="form-horizontal">
             <form:hidden path="id"/>

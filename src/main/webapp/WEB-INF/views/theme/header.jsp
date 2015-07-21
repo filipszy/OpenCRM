@@ -163,18 +163,11 @@
         <div id="navbar" class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li <c:if test="${param.active == 'home'}"> class="active"</c:if>><a href="/">Srona główna</a></li>
-                <li <c:if test="${param.active == 'partners'}"> class="active"</c:if>><a href="/partners/">Partnerzy</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li <c:if test="${param.active == 'partners'}"> class="active"</c:if>><a href="/u/partners/">Partnerzy</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profil <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="/login?logout">Wyloguj</a></li>
                     </ul>
                 </li>
             </ul>

@@ -21,7 +21,7 @@
     <h2><c:if test="${adressesSave.id>0}">Edytuj</c:if><c:if test="${adressesSave.id==0}">Dodaj</c:if> adres</h2>
 </div>
     <div class="col-md-12">
-        <c:url var="saveAction" value="/partners/adresses/save/${partId}"></c:url>
+        <c:url var="saveAction" value="/u/partners/adresses/save/${partId}"></c:url>
 
         <form:form method="post" action="${saveAction}" modelAttribute="adressesSave" commandName="adressesSave"
                    class="form-horizontal">

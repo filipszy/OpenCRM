@@ -14,17 +14,22 @@
       active: ${param.active}   -->
         <c:if test="${param.sidebar == 'partners'}">
         <ul class="nav nav-sidebar">
-            <li <c:if test="${param.active == 'partners'}"> class="active" </c:if>><a href="/partners">Partnerzy</a></li>
-            <li <c:if test="${param.active == 'add'}"> class="active" </c:if>><a href="/partners/add">Dodaj partnera</a></li>
+            <li <c:if test="${param.active == 'partners'}"> class="active" </c:if>><a href="/u/partners">Partnerzy</a></li>
+            <li <c:if test="${param.active == 'add'}"> class="active" </c:if>><a href="/u/partners/add">Dodaj partnera</a></li>
         </ul>
         </c:if>
         <c:if test="${param.sidebar == 'showpartner'}">
         <ul class="nav nav-sidebar">
-            <li <c:if test="${param.active == 'partner'}"> class="active" </c:if>><a href="/partners/show/${param.id}">Szczegóły partnera</a></li>
-            <li <c:if test="${param.active == 'edit'}"> class="active" </c:if>> <a href="/partners/edit/${param.id}">Edytuj partnera</a></li>
-            <li <c:if test="${param.active == 'address'}"> class="active" </c:if>><a href="/partners/add/adresses/${param.id}">Dodaj adres</a></li>
-            <li <c:if test="${param.active == 'persons'}"> class="active" </c:if>><a href="/partners/add/persons/${param.id}">Dodaj osobę</a></li>
-            <li <c:if test="${param.active == 'delete'}"> class="active" </c:if>><a href="/partners/remove/${param.id}">Usuń partnera</a></li>
+            <li <c:if test="${param.active == 'partner'}"> class="active" </c:if>><a href="/u/partners/show/${param.id}">Szczegóły partnera</a></li>
+            <li <c:if test="${param.active == 'edit'}"> class="active" </c:if>> <a href="/u/partners/edit/${param.id}">Edytuj partnera</a></li>
+            <li <c:if test="${param.active == 'address'}"> class="active" </c:if>><a href="/u/partners/add/adresses/${param.id}">Dodaj adres</a></li>
+            <li <c:if test="${param.active == 'persons'}"> class="active" </c:if>><a href="/u/partners/add/persons/${param.id}">Dodaj osobę</a></li>
+            <li <c:if test="${param.active == 'delete'}"> class="active" </c:if>><a href="/u/partners/remove/${param.id}">Usuń partnera</a></li>
         </ul>
+        </c:if>
+        <c:if test="${param.sidebar == 'home'}">
+            <ul class="nav nav-sidebar">
+                <li <c:if test="${param.active == 'home'}"> class="active" </c:if>><a href="/u">Strona główna</a></li>
+            </ul>
         </c:if>
     </div>

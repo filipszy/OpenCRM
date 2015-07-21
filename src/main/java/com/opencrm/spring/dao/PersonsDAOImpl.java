@@ -1,6 +1,5 @@
 package com.opencrm.spring.dao;
 
-import com.opencrm.spring.model.Person;
 import com.opencrm.spring.model.partners.PersonsEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -31,12 +31,12 @@
                     <tbody>
                     <c:forEach items="${listPartners}" var="partner">
                         <tr>
-                            <td><a href="/partners/show/${partner.id}">${partner.name}</a></td>
+                            <td><a href="/u/partners/show/${partner.id}">${partner.name}</a></td>
                             <td>${partner.shortName}</td>
                             <td>${partner.code}</td>
                             <td>
-                                <a href="/partners/edit/${partner.id}" class="btn btn-default btn-xs">Edytuj</a>
-                                <a href="/partners/show/${partner.id}" class="btn btn-xs btn-primary">Przejdź</a>
+                                <a href="/u/partners/edit/${partner.id}" class="btn btn-default btn-xs">Edytuj</a>
+                                <a href="/u/partners/show/${partner.id}" class="btn btn-xs btn-primary">Przejdź</a>
                             </td>
                         </tr>
                     </c:forEach>

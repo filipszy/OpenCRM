@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/partners")
+@RequestMapping(value = "/u/partners")
 public class PartnersController {
 
     private static final Logger logger = LoggerFactory.getLogger(PartnersController.class);
@@ -112,7 +112,7 @@ public class PartnersController {
     public String removePartner(@PathVariable("id") int id) {
 
         this.partnersService.removePartner(id);
-        return "redirect:/partners";
+        return "redirect:/u/partners";
     }
 
     @RequestMapping("/edit/{id}")
@@ -150,7 +150,7 @@ public class PartnersController {
 
         int id = partnerSave.getId();
 
-        return "redirect:/partners/show/" + id;
+        return "redirect:/u/partners/show/" + id;
 
     }
 
@@ -182,7 +182,7 @@ public class PartnersController {
         }
 
 
-        return "redirect:/partners/show/" + id;
+        return "redirect:/u/partners/show/" + id;
 
     }
 
@@ -200,7 +200,7 @@ public class PartnersController {
 
         this.addressesService.removeAdresses(id);
 
-        return "redirect:/partners/show/" + partid;
+        return "redirect:/u/partners/show/" + partid;
     }
 
     //For add and update person both
@@ -231,7 +231,7 @@ public class PartnersController {
         }
 
 
-        return "redirect:/partners/show/" + id;
+        return "redirect:/u/partners/show/" + id;
 
     }
 
@@ -251,6 +251,6 @@ public class PartnersController {
 
         this.personsService.removePerson(id);
 
-        return "redirect:/partners/show/" + partid;
+        return "redirect:/u/partners/show/" + partid;
     }
 }

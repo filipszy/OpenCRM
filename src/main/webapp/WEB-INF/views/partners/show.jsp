@@ -51,8 +51,8 @@
            <c:forEach items="${partner.addressesEntity}" var="ad">
                <strong>${ad.title}</strong>
                <span class="pull-right">
-               <a href="/partners/${ad.id}/adresses/edit/${partner.id}"><span class="glyphicon glyphicon-pencil"></span></a>
-               <a href="/partners/${partner.id}/adresses/remove/${ad.id}"><span class="glyphicon glyphicon-trash"></span></a></span><br/>
+               <a href="/u/partners/${ad.id}/adresses/edit/${partner.id}"><span class="glyphicon glyphicon-pencil"></span></a>
+               <a href="/u/partners/${partner.id}/adresses/remove/${ad.id}"><span class="glyphicon glyphicon-trash"></span></a></span><br/>
                ul. ${ad.street} ${ad.streetNo}
                <c:if test="${!empty(ad.localNo)}">
                    / ${ad.localNo}
@@ -70,8 +70,8 @@
                 <c:forEach items="${partner.personsEntity}" var="pe">
                     <strong>${pe.contactType}</strong>
                <span class="pull-right">
-               <a href="/partners/${pe.id}/persons/edit/${partner.id}"><span class="glyphicon glyphicon-pencil"></span></a>
-               <a href="/partners/${partner.id}/persons/remove/${pe.id}"><span class="glyphicon glyphicon-trash"></span></a></span><br/>
+               <a href="/u/partners/${pe.id}/persons/edit/${partner.id}"><span class="glyphicon glyphicon-pencil"></span></a>
+               <a href="/u/partners/${partner.id}/persons/remove/${pe.id}"><span class="glyphicon glyphicon-trash"></span></a></span><br/>
                     ${pe.firstName} ${pe.lastName}<br/>
                     <c:if test="${!empty(pe.title)}">
                         <i>${pe.title}</i><br/>

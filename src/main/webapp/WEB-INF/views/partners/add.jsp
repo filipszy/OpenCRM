@@ -26,7 +26,7 @@
                 partnera</h2>
         </div>
         <div class="col-md-12">
-            <c:url var="saveAction" value="/partners/save"></c:url>
+            <c:url var="saveAction" value="/u/partners/save"></c:url>
 
             <form:form method="post" action="${saveAction}" modelAttribute="partnerSave" commandName="partnerSave"
                        class="form-horizontal">
