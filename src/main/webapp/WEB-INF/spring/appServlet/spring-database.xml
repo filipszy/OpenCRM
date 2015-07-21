@@ -23,11 +23,11 @@
         <beans:property name="dataSource" ref="dataSource"/>
         <beans:property name="annotatedClasses">
             <beans:list>
-                <beans:value>com.opencrm.spring.model.partners.PartnersEntity</beans:value>
-                <beans:value>com.opencrm.spring.model.partners.AddressesEntity</beans:value>
-                <beans:value>com.opencrm.spring.model.partners.PersonsEntity</beans:value>
-                <beans:value>com.opencrm.spring.model.users.User</beans:value>
-                <beans:value>com.opencrm.spring.model.users.UserRole</beans:value>
+                <beans:value>com.opencrm.spring.partners.model.PartnersEntity</beans:value>
+                <beans:value>com.opencrm.spring.partners.model.AddressesEntity</beans:value>
+                <beans:value>com.opencrm.spring.partners.model.PersonsEntity</beans:value>
+                <beans:value>com.opencrm.spring.users.model.User</beans:value>
+                <beans:value>com.opencrm.spring.users.model.UserRole</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -43,35 +43,35 @@
 
     </beans:bean>
 
-    <beans:bean id="userDao" class="com.opencrm.spring.dao.users.UserDAOImpl">
+    <beans:bean id="userDao" class="com.opencrm.spring.users.dao.UserDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
 
     <beans:bean id="myUserDetailsService"
-                class="com.opencrm.spring.service.users.MyUserDetailService">
+                class="com.opencrm.spring.users.services.MyUserDetailService">
         <beans:property name="userDao" ref="userDao" />
     </beans:bean>
 
 
 
-    <beans:bean id="personsDAO" class="com.opencrm.spring.dao.PersonsDAOImpl">
+    <beans:bean id="personsDAO" class="com.opencrm.spring.partners.dao.PersonsDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean id="personsService" class="com.opencrm.spring.service.PersonsServiceImpl">
+    <beans:bean id="personsService" class="com.opencrm.spring.partners.services.PersonsServiceImpl">
         <beans:property name="personsDAO" ref="personsDAO"></beans:property>
     </beans:bean>
 
-    <beans:bean id="partnersDAO" class="com.opencrm.spring.dao.PartnersDAOImpl">
+    <beans:bean id="partnersDAO" class="com.opencrm.spring.partners.dao.PartnersDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean id="partnersService" class="com.opencrm.spring.service.PartnersServiceImpl">
+    <beans:bean id="partnersService" class="com.opencrm.spring.partners.services.PartnersServiceImpl">
         <beans:property name="partnersDAO" ref="partnersDAO"></beans:property>
     </beans:bean>
 
-    <beans:bean id="adressesDAO" class="com.opencrm.spring.dao.AddressesDAOImpl">
+    <beans:bean id="adressesDAO" class="com.opencrm.spring.partners.dao.AddressesDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean id="adressesService" class="com.opencrm.spring.service.AddressesServiceImpl">
+    <beans:bean id="adressesService" class="com.opencrm.spring.partners.services.AddressesServiceImpl">
         <beans:property name="addressesDAO" ref="adressesDAO"></beans:property>
     </beans:bean>
 
@@ -92,7 +92,7 @@
 
     <aop:config>
         <aop:pointcut id="userServicePointCut"
-                      expression="execution(* com.opencrm.spring.service.users.*Service.*(..))" />
+                      expression="execution(* com.opencrm.spring.users.services.*Service.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="userServicePointCut" />
     </aop:config>
 

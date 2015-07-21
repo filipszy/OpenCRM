@@ -37,9 +37,9 @@
         <beans:property name="defaultEncoding" value="UTF-8"/>
     </beans:bean>
 
-    <beans:bean id="partnersValidator" class="com.opencrm.spring.validator.Partners.PartnersFormValidator"/>
-    <beans:bean id="adressesValidator" class="com.opencrm.spring.validator.Partners.AddressesFormValidator"/>
-    <beans:bean id="personsValidator" class="com.opencrm.spring.validator.Partners.PersonsFormValidator"/>
+    <beans:bean id="partnersValidator" class="com.opencrm.spring.partners.validators.PartnersFormValidator"/>
+    <beans:bean id="adressesValidator" class="com.opencrm.spring.partners.validators.AddressesFormValidator"/>
+    <beans:bean id="personsValidator" class="com.opencrm.spring.partners.validators.PersonsFormValidator"/>
 
 
 

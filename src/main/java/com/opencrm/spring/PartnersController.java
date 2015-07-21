@@ -1,14 +1,14 @@
 package com.opencrm.spring;
 
-import com.opencrm.spring.model.partners.AddressesEntity;
-import com.opencrm.spring.model.partners.PartnersEntity;
-import com.opencrm.spring.model.partners.PersonsEntity;
-import com.opencrm.spring.service.AddressesService;
-import com.opencrm.spring.service.PartnersService;
-import com.opencrm.spring.service.PersonsService;
-import com.opencrm.spring.validator.Partners.AddressesFormValidator;
-import com.opencrm.spring.validator.Partners.PartnersFormValidator;
-import com.opencrm.spring.validator.Partners.PersonsFormValidator;
+import com.opencrm.spring.partners.model.AddressesEntity;
+import com.opencrm.spring.partners.model.PartnersEntity;
+import com.opencrm.spring.partners.model.PersonsEntity;
+import com.opencrm.spring.partners.services.AddressesService;
+import com.opencrm.spring.partners.services.PartnersService;
+import com.opencrm.spring.partners.services.PersonsService;
+import com.opencrm.spring.partners.validators.AddressesFormValidator;
+import com.opencrm.spring.partners.validators.PartnersFormValidator;
+import com.opencrm.spring.partners.validators.PersonsFormValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
