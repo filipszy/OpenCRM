@@ -28,6 +28,10 @@
                 <beans:value>com.opencrm.spring.partners.model.PersonsEntity</beans:value>
                 <beans:value>com.opencrm.spring.users.model.User</beans:value>
                 <beans:value>com.opencrm.spring.users.model.UserRole</beans:value>
+                <beans:value>com.opencrm.spring.products.model.Products</beans:value>
+                <beans:value>com.opencrm.spring.products.model.Producers</beans:value>
+                <beans:value>com.opencrm.spring.products.model.Category</beans:value>
+                <beans:value>com.opencrm.spring.products.model.Type</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">

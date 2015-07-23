@@ -1,4 +1,4 @@
-package com.opencrm.spring;
+package com.opencrm.spring.users;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;

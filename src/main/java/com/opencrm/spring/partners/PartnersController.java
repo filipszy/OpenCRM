@@ -1,4 +1,4 @@
-package com.opencrm.spring;
+package com.opencrm.spring.partners;
 
 import com.opencrm.spring.partners.model.AddressesEntity;
 import com.opencrm.spring.partners.model.PartnersEntity;
