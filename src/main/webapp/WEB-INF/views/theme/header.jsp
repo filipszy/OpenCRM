@@ -164,6 +164,7 @@
             <ul class="nav navbar-nav">
                 <li <c:if test="${param.active == 'home'}"> class="active"</c:if>><a href="/">Srona główna</a></li>
                 <li <c:if test="${param.active == 'partners'}"> class="active"</c:if>><a href="/u/partners/">Partnerzy</a></li>
+                <li <c:if test="${param.active == 'products'}"> class="active"</c:if>><a href="/u/products/">Produkty</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profil <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
